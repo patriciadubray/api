@@ -7,6 +7,7 @@ import os
 from flask import Flask, jsonify, request, send_file
 
 # commentaire de test
+# commentaire de test 2
 
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
