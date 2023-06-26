@@ -7,8 +7,6 @@ import os
 import subprocess
 from flask import Flask, jsonify, request, send_file
 
-# test 1
-
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 os.environ["OMP_NUM_THREADS"] = "1"
@@ -98,6 +96,7 @@ def webhook():
 def run_unit_tests():
     # Exécuter les tests unitaires
     subprocess.run(['python', 'pa_test_api.py'], cwd='/home/patriciaxdubray/api')
+
 
 if __name__ == '__main__':
     # Display a message when the URL is launched
