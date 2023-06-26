@@ -4,8 +4,11 @@ import shap
 import joblib
 import pandas as pd
 import os
-import subprocess
 from flask import Flask, jsonify, request, send_file
+
+# commentaire de test
+# commentaire de test 2
+# commentaire de test 3
 
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
@@ -84,24 +87,9 @@ def webhook():
         repo = git.Repo('/home/patriciaxdubray/api')
         origin = repo.remotes.origin
         origin.pull()
-        
-        # Exécution des tests unitaires avec redirection de la sortie vers un fichier texte
-        run_unit_tests()
-        
-        # Ajout du fichier de résultats des tests unitaires au dépôt GitHub
-        repo.index.add('/home/patriciaxdubray/api/test_results.txt')
-        repo.index.commit('Ajout des résultats des tests unitaires')
-        origin.push()
-        
         return 'Updated PythonAnywhere successfully', 200
     else:
         return 'Wrong event type', 400
-
-
-def run_unit_tests():
-    # Exécuter les tests unitaires avec redirection de la sortie vers un fichier texte
-    with open('/home/patriciaxdubray/api/test_results.txt', 'w') as f:
-        subprocess.run(['python', 'pa_test_api.py'], cwd='/home/patriciaxdubray/api', stdout=f, check=True)
 
 
 if __name__ == '__main__':
