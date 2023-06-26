@@ -12,13 +12,13 @@ os.environ["OMP_NUM_THREADS"] = "1"
 app = Flask(__name__)
 
 # Load the model
-model = joblib.load('/home/patriciadubray/mysite/model.pkl')
+model = joblib.load('/home/patriciaxdubray/api/model.pkl')
 
 # Load the MinMaxScaler from mms.pkl
-mms = joblib.load('/home/patriciadubray/mysite/mms.pkl')
+mms = joblib.load('/home/patriciaxdubray/api/mms.pkl')
 
 # Load the explainer SHAP from shap.pkl
-explainer = joblib.load('/home/patriciadubray/mysite/shap.pkl')
+explainer = joblib.load('/home/patriciaxdubray/api/shap.pkl')
 
 
 # Define the route for making predictions
@@ -51,7 +51,7 @@ def predict():
     shap.summary_plot(shap_values, df_normalized.iloc[[0]], plot_type="bar")
 
     # Save the summary plot to a file
-    summary_plot_path = '/home/patriciadubray/mysite/summary_plot.png'
+    summary_plot_path = '/home/patriciaxdubray/api/summary_plot.png'
     plt.savefig(summary_plot_path)
     plt.clf()  # Clear the plot
 
@@ -67,13 +67,23 @@ def predict():
 # Route for downloading the summary plot
 @app.route('/summary_plot', methods=['GET'])
 def download_summary_plot():
-    return send_file('/home/patriciadubray/mysite/summary_plot.png', as_attachment=True)
+    return send_file('/home/patriciaxdubray/api/summary_plot.png', as_attachment=True)
 
 
 # Route for the home page
 @app.route('/')
 def home():
     return "API dashboard prêt à dépenser"
+
+@app.route('/update_server', methods=['POST'])
+    def webhook():
+        if request.method == 'POST':
+            repo = git.Repo('/home/patriciaxdubray/api')
+            origin = repo.remotes.origin
+origin.pull()
+return 'Updated PythonAnywhere successfully', 200
+        else:
+            return 'Wrong event type', 400
 
 if __name__ == '__main__':
     # Display a message when the URL is launched
