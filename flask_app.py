@@ -1,3 +1,4 @@
+import git
 import matplotlib.pyplot as plt
 import shap
 import joblib
