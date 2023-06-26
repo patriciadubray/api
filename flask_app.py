@@ -6,9 +6,7 @@ import pandas as pd
 import os
 from flask import Flask, jsonify, request, send_file
 
-# commentaire de test
-# commentaire de test 2
-# commentaire de test 3
+# commentaire de test 1
 
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
@@ -71,7 +69,7 @@ def predict():
 
 # Route for downloading the summary plot
 @app.route('/summary_plot', methods=['GET'])
-def download_plot():
+def download_summary_plot():
     return send_file('/home/patriciaxdubray/api/summary_plot.png', as_attachment=True)
 
 
