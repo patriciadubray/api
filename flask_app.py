@@ -85,7 +85,7 @@ def webhook():
         origin = repo.remotes.origin
         origin.pull()
         
-        # Exécution des tests unitaires
+        # Exécution des tests unitaires avec redirection de la sortie vers la console
         run_unit_tests()
         
         return 'Updated PythonAnywhere successfully', 200
@@ -94,8 +94,8 @@ def webhook():
 
 
 def run_unit_tests():
-    # Exécuter les tests unitaires
-    subprocess.run(['python', 'pa_test_api.py'], cwd='/home/patriciaxdubray/api')
+    # Exécuter les tests unitaires avec redirection de la sortie vers la console
+    subprocess.run(['python', 'pa_test_api.py'], cwd='/home/patriciaxdubray/api', check=True)
 
 
 if __name__ == '__main__':
